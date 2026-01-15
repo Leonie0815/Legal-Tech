@@ -1,0 +1,13 @@
+# Virtuelle Umgebung
+venv/
+
+# Umgebungsvariablen (API Keys!)
+.env
+
+# Python Cache
+__pycache__/
+*.pyc
+
+# Betriebssystem-Dateien
+.DS_Store
+Thumbs.db
