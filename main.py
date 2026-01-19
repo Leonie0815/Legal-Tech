@@ -21,9 +21,11 @@ api_key = st.secrets["GOOGLE_API_KEY"]
 
 
 # Frontend
+st.set_page_config(page_title="Anti-Bot", page_icon="😁")
+
 left_co, cent_co, last_co = st.columns([1, 2, 1])
 
-st.set_page_config(page_title="Anti-Bot", page_icon="😁")
+
 
 with cent_co:
     st.image("https://m.media-amazon.com/images/I/91ZPit7ahvL._AC_UF894,1000_QL80_.jpg", width=450)
