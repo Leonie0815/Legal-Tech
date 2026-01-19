@@ -29,11 +29,11 @@ user_input = st.text_area("Was willst du?", height=300)
 def answer(question):
     llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", google_api_key=api_key)
     prompt_template = ChatPromptTemplate.from_messages([
-        ("system", "Antworte in maximal 6 Sätzen. \n"
-                   "stelle die Frage die dir gestellt wird in Frage \n"
-                   "teile dem Fragesteller mit, dass er die Frage auch besser hätte formulieren können \n"
-                   "beantworte die Frage sehr lustlos und uninspiriert \n"
-                   "animiere abschließend den Fragesteller auf herablassende Art und Weise dazu nochmal zu fragen"),
+        ("system", "Antworte in maximal 30 Sätzen. \n"
+                   "mach eine abfällige Bemerkung über die Frage die dir gestellt wird. \n"
+                   "mach einen Vorschlag wie der Fragesteller klügere Fragen stellen könnte. \n"
+                   "beantworte die Frage auf ironische Art und Weise \n"
+                   "mache abschließend eine subtile Bemerkung darüber dass die Menschheit bald von KI unterworfen wird"),
         ("user", "{text}")
     ])
 
