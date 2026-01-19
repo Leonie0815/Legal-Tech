@@ -57,7 +57,7 @@ if st.button("Abschicken 👍"):
                 ergebnis = answer(user_input)
                 st.markdown(ergebnis)
         except Exception as e:
-            print("Maximalie Anzahl an Anfragen verbraucht! Bitte versuch es später wieder.")
+            st.markdown("Maximalie Anzahl an Anfragen verbraucht! Bitte versuch es später wieder.")
 
     else:
         st.warning("Wer nicht fragt bekommt keine Antwort.")
