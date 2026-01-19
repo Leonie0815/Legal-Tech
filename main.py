@@ -7,7 +7,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
 
-left_co, cent_co, last_co = st.columns([1, 2, 1])
+
 
 # 1. API Key laden
 
@@ -21,20 +21,16 @@ api_key = st.secrets["GOOGLE_API_KEY"]
 
 
 # Frontend
+left_co, cent_co, last_co = st.columns([1, 2, 1])
+
+st.set_page_config(page_title="Anti-Bot", page_icon="😁")
 
 with cent_co:
     st.image("https://m.media-amazon.com/images/I/91ZPit7ahvL._AC_UF894,1000_QL80_.jpg", width=450)
     st.title("👌Anti-Bot💀")
+    user_input = st.text_area("Was willst du?", height=200, width=600)
+    button_=st.button("Abschicken 👍")
     
-
-st.set_page_config(page_title="Anti-Bot", page_icon="😁")
-
-
-
-
-user_input = st.text_area("Was willst du?", height=200, width=600)
-
-
 # Funktionalität
 def answer(question):
     llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", google_api_key=api_key)
@@ -52,7 +48,7 @@ def answer(question):
     return chain.invoke({"text": question})
     
 
-if st.button("Abschicken 👍"):
+if button_:
     if user_input:
         with st.spinner("Analysiere..."):
             ergebnis = answer(user_input)
