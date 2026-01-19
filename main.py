@@ -8,8 +8,15 @@ from langchain_core.output_parsers import StrOutputParser
 
 
 # 1. API Key laden
-load_dotenv()
-api_key = os.getenv("GOOGLE_API_KEY")
+
+# lokal
+#load_dotenv()
+#api_key = os.getenv("GOOGLE_API_KEY")
+
+# Streamlit
+api_key = st.secrets["GOOGLE_API_KEY"]
+
+
 
 # Frontend
 st.set_page_config(page_title="Anti-Bot", page_icon="😁")
