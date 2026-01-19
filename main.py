@@ -12,11 +12,11 @@ from langchain_core.output_parsers import StrOutputParser
 # 1. API Key laden
 
 # lokal
-# load_dotenv()
-# api_key = os.getenv("GOOGLE_API_KEY")
+load_dotenv()
+api_key = os.getenv("GOOGLE_API_KEY")
 
 #Streamlit
-api_key = st.secrets["GOOGLE_API_KEY"]
+# api_key = st.secrets["GOOGLE_API_KEY"]
 
 
 
@@ -24,7 +24,6 @@ api_key = st.secrets["GOOGLE_API_KEY"]
 st.set_page_config(page_title="Anti-Bot", page_icon="😁")
 
 left_co, cent_co, last_co = st.columns([1, 2, 1])
-
 
 
 with cent_co:
@@ -53,11 +52,16 @@ def answer(question):
 
 if st.button("Abschicken 👍"):
     if user_input:
-        with st.spinner("Analysiere..."):
-            ergebnis = answer(user_input)
-            st.markdown(ergebnis)
+        try:
+            with st.spinner("Analysiere..."):
+                ergebnis = answer(user_input)
+                st.markdown(ergebnis)
+        except Exception as e:
+            print("Maximalie Anzahl an Anfragen verbraucht! Bitte versuch es später wieder.")
+
     else:
         st.warning("Wer nicht fragt bekommt keine Antwort.")
+
 
 
 
