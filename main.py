@@ -35,7 +35,7 @@ user_input = st.text_area("Was willst du?", height=200, width=600)
     
 # Funktionalität
 def answer(question):
-    llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", google_api_key=api_key)
+    llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash-lite", google_api_key=api_key)
     prompt_template = ChatPromptTemplate.from_messages([
         ("system", "Antworte in maximal 30 Sätzen. \n"
                    "mach eine zynische Bemerkung über die Frage die dir gestellt wird. \n"
