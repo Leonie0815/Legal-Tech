@@ -12,21 +12,25 @@ left_co, cent_co, last_co = st.columns([1, 2, 1])
 # 1. API Key laden
 
 # lokal
-load_dotenv()
-api_key = os.getenv("GOOGLE_API_KEY")
+# load_dotenv()
+# api_key = os.getenv("GOOGLE_API_KEY")
 
-# Streamlit
-# api_key = st.secrets["GOOGLE_API_KEY"]
+#Streamlit
+api_key = st.secrets["GOOGLE_API_KEY"]
 
 
 
 # Frontend
 
-st.set_page_config(page_title="Anti-Bot", page_icon="😁")
-st.title("👌Anti-Bot💀")
-
 with cent_co:
     st.image("https://m.media-amazon.com/images/I/91ZPit7ahvL._AC_UF894,1000_QL80_.jpg", width=450)
+    st.title("👌Anti-Bot💀")
+    
+
+st.set_page_config(page_title="Anti-Bot", page_icon="😁")
+
+
+
 
 user_input = st.text_area("Was willst du?", height=200, width=600)
 
