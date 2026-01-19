@@ -1,70 +1,51 @@
-# import streamlit as st
-
-
-# # Seite Konfigurieren
-
-# st.set_page_config(page_title="Erste Schritte Legal Tech", page_icon="⚖️")
-
-# # Titel und Einleitung
-# st.title("⚖️ Mein erstes Legal-Tech Tool")
-# st.write("Willkommen! Dies ist ein Prototyp für einen AGB-Checker.")
-
-# #test
-
-
-import streamlit as st
 import os
 from dotenv import load_dotenv
+import streamlit as st
+
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
-# 1. API Key aus der .env Datei laden
+
+# 1. API Key laden
 load_dotenv()
 api_key = os.getenv("GOOGLE_API_KEY")
 
-def analyze_agb(agb_text):
-    # Modell-Konfiguration (GPT-4o-mini ist schnell und kosteneffizient)
-    model = ChatGoogleGenerativeAI(model="gemini-pro",google_api_key=api_key, temperature=0)
+# Frontend
+st.set_page_config(page_title="Anti-Bot", page_icon="😁")
+st.title("👌Anti-Bot💀")
 
-    # Der System-Prompt definiert die "Rolle" und das Fachwissen der KI
+user_input = st.text_area("Was willst du?", height=300)
+
+
+# Funktionalität
+def answer(question):
+    llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", google_api_key=api_key)
     prompt_template = ChatPromptTemplate.from_messages([
-        ("system", "Du bist ein spezialisierter Rechtsanwalt für Verbraucherschutz in Deutschland. "
-                   "Analysiere den folgenden AGB-Text auf kritische Klauseln, die für Verbraucher "
-                   "nachteilig oder ungewöhnlich sein könnten (z.B. versteckte Kosten, lange Kündigungsfristen, "
-                   "automatische Verlängerungen oder Haftungsausschlüsse). "
-                   "Antworte strukturiert in Markdown mit: \n"
-                   "1. Kurzzusammenfassung\n"
-                   "2. Kritische Punkte (mit Begründung)\n"
-                   "3. Empfehlung."),
+        ("system", "Antworte in maximal 6 Sätzen. \n"
+                   "stelle die Frage die dir gestellt wird in Frage \n"
+                   "teile dem Fragesteller mit, dass er die Frage auch besser hätte formulieren können \n"
+                   "beantworte die Frage sehr lustlos und uninspiriert \n"
+                   "animiere abschließend den Fragesteller auf herablassende Art und Weise dazu nochmal zu fragen"),
         ("user", "{text}")
     ])
 
-    # Die Chain: Prompt -> KI-Modell -> Output als Text
-    chain = prompt_template | model | StrOutputParser()
+    chain = prompt_template | llm | StrOutputParser()
 
-    # Ausführung der Analyse
-    return chain.invoke({"text": agb_text})
+    return chain.invoke({"text": question})
+    
 
-# --- Streamlit UI Oberfläche ---
-
-st.set_page_config(page_title="LegalTech AGB-Checker", page_icon="⚖️")
-
-st.title("⚖️ KI AGB-Checker")
-st.write("Füge einen AGB-Text ein, um ihn auf verbraucherunfreundliche Klauseln zu prüfen.")
-
-
-# Textfeld für die Eingabe
-user_input = st.text_area("AGB Text hier hineinkopieren:", height=300)
-
-if st.button("Analyse starten"):
+if st.button("Abschicken 👍"):
     if user_input:
-        with st.spinner("Die KI analysiert die Paragrafen... bitte warten."):
-            try:
-                result = analyze_agb(user_input)
-                st.markdown("### Analyse-Ergebnis")
-                st.markdown(result)
-            except Exception as e:
-                st.error(f"Ein Fehler ist aufgetreten: {e}")
+        with st.spinner("Analysiere..."):
+            ergebnis = answer(user_input)
+            st.markdown(ergebnis)
     else:
-        st.warning("Bitte füge zuerst einen Text ein, den ich prüfen soll.")
+        st.warning("Wer nicht fragt bekommt keine Antwort.")
+
+
+
+
+
+
+
