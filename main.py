@@ -28,8 +28,9 @@ st.set_page_config(page_title="Anti-Bot", page_icon="😁")
 with cent_co:
     st.image("https://m.media-amazon.com/images/I/91ZPit7ahvL._AC_UF894,1000_QL80_.jpg", width=450)
     st.title("👌Anti-Bot💀")
-    user_input = st.text_area("Was willst du?", height=200, width=600)
-    button_=st.button("Abschicken 👍")
+    
+
+user_input = st.text_area("Was willst du?", height=200, width=600)
     
 # Funktionalität
 def answer(question):
@@ -48,7 +49,7 @@ def answer(question):
     return chain.invoke({"text": question})
     
 
-if button_:
+if st.button("Abschicken 👍"):
     if user_input:
         with st.spinner("Analysiere..."):
             ergebnis = answer(user_input)
